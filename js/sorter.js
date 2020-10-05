@@ -52,7 +52,7 @@ function flip(arr, flipIndex) {
  */
 function arrangePancakesHelper(arr, unsortedIndex) {
 	// check if the array (before unsortedIndex) is length 1 or fewer for base case
-	if (unsortedIndex <= 1) {
+	if (unsortedIndex < 1) {
 		// do nothing, it’s sorted
 		return;
 	}
