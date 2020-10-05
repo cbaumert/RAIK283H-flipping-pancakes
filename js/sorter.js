@@ -44,6 +44,12 @@ function flip(arr, flipIndex) {
 	return arr;
 }
 
+/**
+ * Recursiely sorts an array in place, returning nothing.
+ *
+ * @param arr the array to sort
+ * @param unsortedIndex the first index of an unsorted element (moving from the end of the array)
+ */
 function arrangePancakesHelper(arr, unsortedIndex) {
 	// check if the array (before unsortedIndex) is length 1 or fewer for base case
 	if (unsortedIndex <= 1) {
@@ -77,7 +83,8 @@ function arrangePancakesHelper(arr, unsortedIndex) {
  */
 function arrangePancakes(arr) {
 
+	// call the helper function to recursively sort the array in place
 	arrangePancakesHelper(arr, arr.length - 1);
-
+	// return the array for user convenience
 	return arr;
 }
