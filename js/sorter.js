@@ -27,8 +27,46 @@ function generateRandomArray(n) {
  * array is modified), but the array is returned to the user for convenience.
  */
 function flip(arr, flipIndex) {
-	// function logic left as an exercise
+
+	// iterate through the first half of the array past flipIndex
+	for (let i = 0; i < flipIndex / 2; i++) {
+		// get the mirrored index on the opposite side of the working half of the array
+		let indexToSwap = flipIndex - i;
+
+		// store the current value at i
+		let temp = arr[i];
+		// set the value at i to the value at indexToSwap
+		arr[i] = arr[indexToSwap];
+		// update the value at indexToSwap
+		arr[indexToSwap] = temp;
+	}
+
 	return arr;
+}
+
+function arrangePancakesHelper(arr, unsortedIndex) {
+	// check if the array (before unsortedIndex) is length 1 or fewer for base case
+	if (unsortedIndex <= 1) {
+		// do nothing, it’s sorted
+		return;
+	}
+
+	// find the largest element in the array
+	let largestIndex = 0;
+	for (let i = 1; i <= unsortedIndex; i++) {
+		if (arr[i] > arr[largestIndex]) {
+			largestIndex = i;
+		}
+	}
+
+	// move the largest pancake to the top (if it’s not already there)
+	arr = flip(arr, largestIndex);
+
+	// flip the whole stack of pancakes
+	arr = flip(arr, unsortedIndex);
+
+	// recurse and sort the rest of the pancakes in the stack
+	return arrangePancakesHelper(arr, unsortedIndex - 1);
 }
 
 /*
@@ -38,6 +76,8 @@ function flip(arr, flipIndex) {
  * but the array is returned to the user for convenience.
  */
 function arrangePancakes(arr) {
-	// function logic left as an exercise
-	return [];
+
+	arrangePancakesHelper(arr, arr.length - 1);
+
+	return arr;
 }
